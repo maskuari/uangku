@@ -6,7 +6,9 @@
     <meta name="theme-color" content="#f6f7fb">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Uangku') · Uangku</title>
-    <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/icon-192.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/icon-192.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
     <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=9">
     <script src="{{ asset('assets/app.js') }}?v=4" defer></script>

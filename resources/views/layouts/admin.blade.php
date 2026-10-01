@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f6f7fb">
     <title>@yield('title', 'Admin') · Uangku</title>
-    <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/icon-192.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/icon-192.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
     <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=8">
     <script src="{{ asset('assets/app.js') }}?v=3" defer></script>
