@@ -8,7 +8,7 @@
     <title>@yield('title', 'Uangku') · Uangku</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}">
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
-    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=4">
+    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=5">
     <script src="{{ asset('assets/app.js') }}" defer></script>
 </head>
 <body>

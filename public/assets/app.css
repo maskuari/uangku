@@ -9,4 +9,4 @@ html[data-theme=dark]{color-scheme:dark;--bg:#101221;--surface:#1a1d31;--surface
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 
 html:not(.js) .reveal{opacity:1;transform:none}
-@media(max-width:680px){.sidebar{height:100dvh;padding-top:24px;padding-bottom:18px;overflow-y:auto}.sidebar-label{margin-top:32px}.sidebar-tip{display:none}.sidebar-bottom{margin-top:auto;padding-top:18px}.sidebar-bottom .logout{background:var(--red-soft);color:var(--red)}}
+@media(max-width:680px){.sidebar{height:100dvh;padding-top:20px;padding-bottom:14px;overflow-y:auto}.sidebar-label{margin:24px 15px 10px}.side-nav{gap:3px}.side-nav a{min-height:44px}.sidebar-bottom{margin-top:auto;padding-top:10px}.sidebar-tip{display:block;padding:12px 14px;margin-bottom:8px}.sidebar-tip .tip-icon{width:28px;height:28px;margin-bottom:8px}.sidebar-tip strong{font-size:12px}.sidebar-tip p{font-size:10px;line-height:1.35;margin-top:4px}.sidebar-bottom .logout{padding:10px 14px;background:var(--red-soft);color:var(--red)}}
