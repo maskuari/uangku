@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f6f7fb">
     <title>@yield('title', 'Admin') · Uangku</title>
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/icon-192.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('assets/icon-192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/uangku-icon-192.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/uangku-icon-192.png') }}">
     <script>
         (() => {
             const origin = window.location.origin;
@@ -21,8 +21,8 @@
                 background_color: '#f6f7fb',
                 theme_color: '#5b45ee',
                 icons: [
-                    { src: origin + '/assets/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-                    { src: origin + '/assets/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' }
+                    { src: origin + '/assets/uangku-icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+                    { src: origin + '/assets/uangku-icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' }
                 ]
             };
             const link = document.createElement('link');
