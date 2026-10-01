@@ -8,8 +8,8 @@
     <title>@yield('title', 'Uangku') · Uangku</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}">
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
-    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=8">
-    <script src="{{ asset('assets/app.js') }}?v=3" defer></script>
+    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=9">
+    <script src="{{ asset('assets/app.js') }}?v=4" defer></script>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true">
