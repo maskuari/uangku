@@ -33,7 +33,7 @@
         })();
     </script>
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
-    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=9">
+    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=10">
     <script src="{{ asset('assets/app.js') }}?v=4" defer></script>
 </head>
 <body>
@@ -56,7 +56,7 @@
 @auth
 <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-        <a href="{{ route('dashboard') }}" class="brand"><img src="{{ asset('assets/logo.png') }}" alt="Logo Uangku"><span>uangku<span class="brand-dot">.</span><small>personal finance</small></span></a>
+        <a href="{{ route('dashboard') }}" class="brand brand-image" aria-label="Uangku"><img src="{{ asset('assets/uangku.png') }}" alt="Uangku"></a>
         <div class="sidebar-label">MENU UTAMA</div>
         <nav class="side-nav" aria-label="Navigasi utama">
             <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}"><svg><use href="#i-grid"/></svg>Dashboard</a>
@@ -93,7 +93,7 @@
 </nav>
 @else
 <main class="auth-shell">
-    <div class="auth-art"><div class="auth-glow"></div><div class="auth-art-content"><a href="{{ route('login') }}" class="brand auth-brand"><img src="{{ asset('assets/logo.png') }}" alt="Logo Uangku"><span>uangku<span class="brand-dot">.</span></span></a><div class="auth-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-card"><div class="visual-card-top"><span>Saldo yang tertata</span><span>✦</span></div><strong>Rp 12.850.000</strong><div class="visual-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="float-pill float-in">↗ Pemasukan tercatat</span><span class="float-pill float-out">↘ Pengeluaran terpantau</span></div><h1>Lebih tenang<br>saat mengatur uang.</h1><p>Satu tempat untuk mencatat, memahami, dan merencanakan keuanganmu.</p></div></div>
+    <div class="auth-art"><div class="auth-glow"></div><div class="auth-art-content"><a href="{{ route('login') }}" class="brand auth-brand brand-image" aria-label="Uangku"><img src="{{ asset('assets/uangku.png') }}" alt="Uangku"></a><div class="auth-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-card"><div class="visual-card-top"><span>Saldo yang tertata</span><span>✦</span></div><strong>Rp 12.850.000</strong><div class="visual-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="float-pill float-in">↗ Pemasukan tercatat</span><span class="float-pill float-out">↘ Pengeluaran terpantau</span></div><h1>Lebih tenang<br>saat mengatur uang.</h1><p>Satu tempat untuk mencatat, memahami, dan merencanakan keuanganmu.</p></div></div>
     <div class="auth-main"><div class="auth-top"><button type="button" class="icon-button theme-toggle" data-theme-toggle aria-label="Ganti tema"><svg class="moon"><use href="#i-moon"/></svg><svg class="sun"><use href="#i-sun"/></svg></button></div><div class="auth-panel">@if($errors->any()) <div class="alert error" role="alert">{{ $errors->first() }}</div> @endif @yield('content')</div><div class="auth-footer">© {{ now()->year }} Uangku. Dibuat untuk hari yang lebih tertata.</div></div>
 </main>
 @endauth
