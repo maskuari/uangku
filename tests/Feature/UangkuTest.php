@@ -105,6 +105,17 @@ class UangkuTest extends TestCase
             ->assertDontSee('Data keuangan rahasia')
             ->assertDontSee('987654321')
             ->assertDontSee($managedUser->password);
+        $this->get('/dashboard')->assertRedirect('/admin');
+        $this->get('/transactions')->assertRedirect('/admin');
+        $this->get('/reports')->assertRedirect('/admin');
+        $this->get('/settings')->assertRedirect('/admin');
+        $this->post('/transactions', [
+            'type' => 'income', 'title' => 'Tidak boleh', 'category' => 'Gaji',
+            'amount' => 100, 'occurred_on' => now()->toDateString(),
+        ])->assertForbidden();
+        $this->put('/settings', [
+            'name' => 'Admin Uangku', 'current_balance' => 999999,
+        ])->assertForbidden();
         $this->actingAs($managedUser)->get('/admin')->assertForbidden();
 
         $this->actingAs($admin)->put('/admin/users/'.$managedUser->id.'/password', [
