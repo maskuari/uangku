@@ -9,5 +9,4 @@ html[data-theme=dark]{color-scheme:dark;--bg:#101221;--surface:#1a1d31;--surface
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 
 html:not(.js) .reveal{opacity:1;transform:none}
-@media(max-width:680px){.mobile-nav{justify-content:space-between}.mobile-nav a,.mobile-nav-logout{flex:1;min-width:0}.mobile-nav-logout{height:100%;margin:0}.mobile-nav-logout button{display:grid;align-content:center;justify-items:center;gap:3px;width:100%;height:100%;padding:0;border:0;background:transparent;color:var(--muted);font-size:9px;font-weight:700}.mobile-nav-logout button:hover,.mobile-nav-logout button:focus-visible{color:var(--red)}.mobile-nav-logout svg{width:20px;height:20px}}
 @media(max-width:680px){.sidebar{height:100dvh;padding-top:24px;padding-bottom:18px;overflow-y:auto}.sidebar-label{margin-top:32px}.sidebar-tip{display:none}.sidebar-bottom{margin-top:auto;padding-top:18px}.sidebar-bottom .logout{background:var(--red-soft);color:var(--red)}}

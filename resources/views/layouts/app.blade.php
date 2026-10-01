@@ -8,7 +8,7 @@
     <title>@yield('title', 'Uangku') · Uangku</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}">
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
-    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=3">
+    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=4">
     <script src="{{ asset('assets/app.js') }}" defer></script>
 </head>
 <body>
@@ -65,7 +65,6 @@
     <a href="{{ route('transactions.index') }}" class="{{ request()->routeIs('transactions.*') ? 'active' : '' }}"><svg><use href="#i-arrows"/></svg><span>Transaksi</span></a>
     <a href="{{ route('reports.index') }}" class="{{ request()->routeIs('reports.*') ? 'active' : '' }}"><svg><use href="#i-chart"/></svg><span>Rekap</span></a>
     <a href="{{ route('settings.index') }}" class="{{ request()->routeIs('settings.*') ? 'active' : '' }}"><svg><use href="#i-settings"/></svg><span>Setelan</span></a>
-    <form method="post" action="{{ route('logout') }}" class="mobile-nav-logout">@csrf<button type="submit" aria-label="Keluar akun"><svg><use href="#i-logout"/></svg><span>Keluar</span></button></form>
 </nav>
 @else
 <main class="auth-shell">
