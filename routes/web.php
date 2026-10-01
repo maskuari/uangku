@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports/pdf', [ReportController::class, 'pdf'])->name('reports.pdf');
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::put('/settings/balance', [SettingsController::class, 'balance'])->name('settings.balance');
     Route::put('/settings/password', [SettingsController::class, 'password'])->name('settings.password');
     Route::post('/settings/prune', [SettingsController::class, 'prune'])->name('settings.prune');
 });

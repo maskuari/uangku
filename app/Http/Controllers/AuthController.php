@@ -21,6 +21,10 @@ class AuthController extends Controller
             return back()->withErrors(['email' => 'Email atau kata sandi tidak sesuai.'])->onlyInput('email');
         }
         $request->session()->regenerate();
+        $user = $request->user();
+        if ($user->opening_balance === 0 && ! $user->transactions()->exists()) {
+            $request->session()->flash('show_balance_setup', true);
+        }
         return redirect()->intended(route('dashboard'));
     }
 
@@ -34,6 +38,7 @@ class AuthController extends Controller
         $user = User::create($data);
         Auth::login($user);
         $request->session()->regenerate();
+        $request->session()->flash('show_balance_setup', true);
         return redirect()->route('dashboard')->with('success', 'Akun berhasil dibuat. Mulai dengan mengisi saldo awal.');
     }
 

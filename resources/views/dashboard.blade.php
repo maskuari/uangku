@@ -2,8 +2,24 @@
 @section('title', 'Dashboard')
 @section('content')
 <div class="page-heading reveal"><div><span class="eyebrow">DASHBOARD</span><h1>Halo, {{ explode(' ', auth()->user()->name)[0] }} <span class="wave">✳</span></h1><p>Ini ringkasan uangmu hari ini. Tetap semangat mengelolanya!</p></div><a href="{{ route('transactions.create') }}" class="btn btn-primary"><svg><use href="#i-plus"/></svg> Tambah transaksi</a></div>
-@if(auth()->user()->opening_balance === 0 && $recent->isEmpty())
-<div class="onboarding reveal"><span class="onboarding-icon"><svg><use href="#i-spark"/></svg></span><div><strong>Selamat datang di Uangku!</strong><p>Atur saldo awal terlebih dahulu, lalu mulai catat pemasukan dan pengeluaranmu.</p></div><a href="{{ route('settings.index') }}" class="text-link">Atur saldo awal <svg><use href="#i-arrow"/></svg></a></div>
+@if($showBalanceSetup)
+<div class="balance-setup-modal" data-balance-modal role="dialog" aria-modal="true" aria-labelledby="balance-setup-title">
+    <div class="balance-setup-backdrop"></div>
+    <div class="balance-setup-card">
+        <span class="balance-setup-icon"><svg><use href="#i-wallet"/></svg></span>
+        <span class="eyebrow">LANGKAH PERTAMA</span>
+        <h2 id="balance-setup-title">Berapa saldo yang kamu punya sekarang?</h2>
+        <p>Masukkan jumlah uangmu saat ini. Setelah itu, Uangku akan otomatis menambah atau menguranginya setiap ada transaksi.</p>
+        <form method="post" action="{{ route('settings.balance') }}" class="balance-setup-form">
+            @csrf @method('PUT')
+            <div class="field"><label for="setup_current_balance">Saldo saat ini (Rp)</label><input id="setup_current_balance" name="current_balance" type="number" inputmode="numeric" min="-999999999999" max="999999999999" placeholder="Contoh: 1000000" required autofocus></div>
+            <div class="balance-setup-actions"><button type="button" class="btn btn-outline" data-balance-later>Nanti</button><button type="submit" class="btn btn-primary">Simpan saldo</button></div>
+        </form>
+    </div>
+</div>
+@endif
+@if($needsBalanceSetup)
+<div class="onboarding balance-guide reveal" data-balance-guide role="status"><span class="onboarding-icon"><svg><use href="#i-spark"/></svg></span><div><strong>Asisten Uangku</strong><p>Belum siap mengisi saldo? Tidak apa-apa. Kamu bisa mengisinya kapan saja melalui menu Setelan.</p></div><a href="{{ route('settings.index') }}#current_balance" class="text-link">Buka Setelan <svg><use href="#i-arrow"/></svg></a></div>
 @endif
 <div class="dashboard-grid">
     <section class="balance-card reveal" aria-label="Saldo saat ini"><div class="balance-decoration one"></div><div class="balance-decoration two"></div><div class="balance-top"><span class="balance-badge"><svg><use href="#i-wallet"/></svg> SALDO SAAT INI</span><span class="balance-dots">•••</span></div><div class="balance-main"><small>Total uang yang kamu punya</small><strong>Rp {{ number_format($balance, 0, ',', '.') }}</strong></div><div class="balance-bottom"><span>Terus jaga arus uangmu tetap sehat</span><span class="balance-mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></section>

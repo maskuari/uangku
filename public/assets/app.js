@@ -34,3 +34,23 @@ if ('IntersectionObserver' in window) {
 } else {
     document.querySelectorAll('.reveal').forEach(element => element.classList.add('visible'));
 }
+const balanceModal = document.querySelector('[data-balance-modal]');
+if (balanceModal) {
+    const laterButton = balanceModal.querySelector('[data-balance-later]');
+    const balanceGuide = document.querySelector('[data-balance-guide]');
+    document.body.classList.add('modal-open');
+    requestAnimationFrame(() => balanceModal.classList.add('is-open'));
+
+    laterButton?.addEventListener('click', () => {
+        balanceModal.classList.remove('is-open');
+        balanceModal.classList.add('is-closing');
+        document.body.classList.remove('modal-open');
+        window.setTimeout(() => {
+            balanceModal.hidden = true;
+            if (balanceGuide) {
+                balanceGuide.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                balanceGuide.classList.add('guide-highlight');
+            }
+        }, 220);
+    });
+}

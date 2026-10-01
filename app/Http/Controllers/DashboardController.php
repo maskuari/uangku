@@ -30,6 +30,8 @@ class DashboardController extends Controller
             ];
         });
         $recent = $user->transactions()->orderByDesc('occurred_on')->orderByDesc('id')->limit(6)->get();
-        return view('dashboard', compact('balance', 'todayExpense', 'monthIncome', 'monthExpense', 'week', 'recent'));
+        $needsBalanceSetup = $user->opening_balance === 0 && $recent->isEmpty();
+        $showBalanceSetup = $needsBalanceSetup && $request->session()->pull('show_balance_setup', false);
+        return view('dashboard', compact('balance', 'todayExpense', 'monthIncome', 'monthExpense', 'week', 'recent', 'needsBalanceSetup', 'showBalanceSetup'));
     }
 }

@@ -39,7 +39,7 @@ class UangkuTest extends TestCase
         $this->get('/dashboard')->assertOk()->assertSee('Rp 90.000')->assertSee('Rp 10.000');
         $this->get('/transactions/create')->assertOk()->assertSee('Tambah transaksi');
         $this->get('/transactions/'.$transaction->id.'/edit')->assertOk()->assertSee('Makan siang');
-        $this->get('/settings')->assertOk()->assertSee('Saldo awal');
+        $this->get('/settings')->assertOk()->assertSee('Saldo saat ini')->assertSee('value="90000"', false);
         $this->actingAs($other)->get('/transactions')->assertOk()->assertDontSee('Makan siang');
         $this->get('/transactions/'.$transaction->id.'/edit')->assertNotFound();
         $this->delete('/transactions/'.$transaction->id)->assertNotFound();
@@ -53,6 +53,32 @@ class UangkuTest extends TestCase
         $this->get('/dashboard')->assertOk()->assertSee('Rp 100.000');
     }
 
+    public function test_balance_setup_and_settings_edit_the_current_balance(): void
+    {
+        $newUser = User::factory()->create(['opening_balance' => 0]);
+        $this->post('/login', ['email' => $newUser->email, 'password' => 'password'])->assertRedirect('/dashboard');
+        $this->get('/dashboard')
+            ->assertOk()
+            ->assertSee('Berapa saldo yang kamu punya sekarang?')
+            ->assertSee('Asisten Uangku');
+        $this->put('/settings/balance', ['current_balance' => 250000])->assertRedirect('/dashboard');
+        $this->get('/dashboard')->assertOk()->assertSee('Rp 250.000');
+
+        $newUser->transactions()->create([
+            'type' => 'expense', 'title' => 'Belanja', 'category' => 'Belanja',
+            'amount' => 10000, 'occurred_on' => now()->toDateString(),
+        ]);
+        $this->get('/settings')->assertOk()
+            ->assertSee('Saldo saat ini')
+            ->assertSee('value="240000"', false);
+        $this->put('/settings', [
+            'name' => $newUser->name,
+            'current_balance' => 300000,
+            'monthly_budget' => null,
+        ])->assertRedirect();
+        $this->assertSame(310000, $newUser->fresh()->opening_balance);
+        $this->get('/dashboard')->assertOk()->assertSee('Rp 300.000');
+    }
     public function test_old_data_cleanup_keeps_current_balance(): void
     {
         $this->travelTo(now()->setDate(2026, 10, 1));
