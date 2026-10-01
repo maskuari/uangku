@@ -19,7 +19,7 @@
 </div>
 @endif
 @if($needsBalanceSetup)
-<div class="onboarding balance-guide reveal" data-balance-guide role="status"><span class="onboarding-icon"><svg><use href="#i-spark"/></svg></span><div><strong>Asisten Uangku</strong><p>Belum siap mengisi saldo? Tidak apa-apa. Kamu bisa mengisinya kapan saja melalui menu Setelan.</p></div><a href="{{ route('settings.index') }}#current_balance" class="text-link">Buka Setelan <svg><use href="#i-arrow"/></svg></a></div>
+<a href="{{ route('settings.index') }}#current_balance" class="onboarding balance-guide reveal" data-balance-guide role="status"><span class="onboarding-icon"><svg><use href="#i-spark"/></svg></span><div><strong>Asisten Uangku</strong><p>Belum siap mengisi saldo? Tidak apa-apa. Ketuk kartu ini untuk membuka Setelan.</p></div><span class="balance-guide-action">Buka Setelan <svg><use href="#i-arrow"/></svg></span></a>
 @endif
 <div class="dashboard-grid">
     <section class="balance-card reveal" aria-label="Saldo saat ini"><div class="balance-decoration one"></div><div class="balance-decoration two"></div><div class="balance-top"><span class="balance-badge"><svg><use href="#i-wallet"/></svg> SALDO SAAT INI</span><span class="balance-dots">•••</span></div><div class="balance-main"><small>Total uang yang kamu punya</small><strong>Rp {{ number_format($balance, 0, ',', '.') }}</strong></div><div class="balance-bottom"><span>Terus jaga arus uangmu tetap sehat</span><span class="balance-mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></section>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
@@ -25,4 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/settings/balance', [SettingsController::class, 'balance'])->name('settings.balance');
     Route::put('/settings/password', [SettingsController::class, 'password'])->name('settings.password');
     Route::post('/settings/prune', [SettingsController::class, 'prune'])->name('settings.prune');
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/users/{user}/password', [AdminController::class, 'editPassword'])->name('password.edit');
+        Route::put('/users/{user}/password', [AdminController::class, 'updatePassword'])->name('password.update');
+        Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+    });
 });

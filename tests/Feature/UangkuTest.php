@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class UangkuTest extends TestCase
@@ -78,6 +79,44 @@ class UangkuTest extends TestCase
         ])->assertRedirect();
         $this->assertSame(310000, $newUser->fresh()->opening_balance);
         $this->get('/dashboard')->assertOk()->assertSee('Rp 300.000');
+    }
+    public function test_admin_can_manage_users_without_seeing_financial_data(): void
+    {
+        config([
+            'admin.email' => 'maskuari@adminuangku.com',
+            'admin.bootstrap_password' => 'test-admin-secret',
+        ]);
+        $managedUser = User::factory()->create(['opening_balance' => 987654321]);
+        $transaction = $managedUser->transactions()->create([
+            'type' => 'income', 'title' => 'Data keuangan rahasia', 'category' => 'Gaji',
+            'amount' => 123456789, 'occurred_on' => now()->toDateString(),
+        ]);
+
+        $this->get('/admin')->assertRedirect('/login');
+        $this->post('/login', [
+            'email' => 'maskuari@adminuangku.com',
+            'password' => 'test-admin-secret',
+        ])->assertRedirect('/admin');
+        $admin = User::where('email', 'maskuari@adminuangku.com')->firstOrFail();
+
+        $response = $this->get('/admin')->assertOk()
+            ->assertSee($managedUser->email)
+            ->assertSee('Terenkripsi')
+            ->assertDontSee('Data keuangan rahasia')
+            ->assertDontSee('987654321')
+            ->assertDontSee($managedUser->password);
+        $this->actingAs($managedUser)->get('/admin')->assertForbidden();
+
+        $this->actingAs($admin)->put('/admin/users/'.$managedUser->id.'/password', [
+            'password' => 'password-baru',
+            'password_confirmation' => 'password-baru',
+        ])->assertRedirect('/admin');
+        $this->assertTrue(Hash::check('password-baru', $managedUser->fresh()->password));
+
+        $this->delete('/admin/users/'.$managedUser->id)->assertRedirect();
+        $this->assertDatabaseMissing('users', ['id' => $managedUser->id]);
+        $this->assertDatabaseMissing('transactions', ['id' => $transaction->id]);
+        $this->delete('/admin/users/'.$admin->id)->assertForbidden();
     }
     public function test_old_data_cleanup_keeps_current_balance(): void
     {

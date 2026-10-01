@@ -33,5 +33,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin(): bool
+    {
+        return strcasecmp($this->email, (string) config('admin.email')) === 0;
+    }
+
     public function transactions(): HasMany { return $this->hasMany(Transaction::class); }
 }
