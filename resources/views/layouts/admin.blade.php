@@ -7,7 +7,30 @@
     <title>@yield('title', 'Admin') · Uangku</title>
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/icon-192.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/icon-192.png') }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <script>
+        (() => {
+            const origin = window.location.origin;
+            const manifest = {
+                id: origin + '/',
+                name: 'Uangku',
+                short_name: 'Uangku',
+                description: 'Pencatatan keuangan pribadi.',
+                start_url: origin + '/',
+                scope: origin + '/',
+                display: 'standalone',
+                background_color: '#f6f7fb',
+                theme_color: '#5b45ee',
+                icons: [
+                    { src: origin + '/assets/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+                    { src: origin + '/assets/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' }
+                ]
+            };
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' }));
+            document.head.appendChild(link);
+        })();
+    </script>
     <script>document.documentElement.classList.add('js');document.documentElement.dataset.theme = localStorage.getItem('uangku-theme') || 'light';</script>
     <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v=8">
     <script src="{{ asset('assets/app.js') }}?v=3" defer></script>
